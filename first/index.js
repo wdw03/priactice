@@ -1,68 +1,57 @@
-    const h1target = document.getElementById("h1trag") 
-    const startcountn = document.getElementById("startcountung")
-    const stopcoutng = document.getElementById("stopcoutng")
-    const decrested = document.getElementById("decrested")
-    const inputdata = document.getElementById("age")
-    const onlyinputnumber = document.getElementById("onlyinputnumber")
+const calcutaionpart = document.getElementById("calcutaionpart");
+const h1showingcal = document.getElementById("h1showingcal");
+const totalvkt = document.getElementById("totalvkt");
 
+calcutaionpart.addEventListener("click", (e) => {
 
-
-
-
-    let interbidid;
-    let decredt;
-    // let counties = 0;
-    h1target.style.color = "red";
-    h1target.style.fontSize = "24px";
-    h1target.style.backgroundColor = "yellow";
-    let real = 0;
-
-    // console.log(real)
-    // const data = Number(inputdata.value)
-
-
-    onlyinputnumber.onclick = function () {
-        const data = Number(inputdata.value)
-        real = data + 1 ;
-        console.log(real)
-        return real;
+    if (
+        e.target.tagName === "BUTTON" &&
+        e.target.innerText !== "=" &&
+        e.target.innerText !== "AC"
+    ) {
+        h1showingcal.innerText += e.target.innerText;
     }
 
+        if (e.target.innerText === "AC") {
+    h1showingcal.innerText = "";
+    totalvkt.innerText = "";
+             }
 
+    const expression = h1showingcal.innerText;
 
-    function useh1tag() {
-        h1target.innerHTML = `this is your count code ${real}`;
+    if (e.target.innerText === "=") {
+
+        if (expression.includes("+")) {
+            const parts = expression.split("+");
+            const num1 = Number(parts[0]);
+            const num2 = Number(parts[1]);
+            const total = num1 + num2;
+            totalvkt.innerHTML = total;
+        }
+
+        if (expression.includes("-")) {
+            const parts = expression.split("-");
+            const num1 = Number(parts[0]);
+            const num2 = Number(parts[1]);
+            const total = num1 - num2;
+            totalvkt.innerHTML = total;
+        }
+
+        if (expression.includes("*")) {
+            const parts = expression.split("*");
+            const num1 = Number(parts[0]);
+            const num2 = Number(parts[1]);
+            const total = num1 * num2;
+            totalvkt.innerHTML = total;
+        }
+
+        if (expression.includes("/")) {
+            const parts = expression.split("/");
+            const num1 = Number(parts[0]);
+            const num2 = Number(parts[1]);
+            const total = num1 / num2;
+            totalvkt.innerHTML = total;
+        }
     }
 
-
-    startcountn.onclick = function () {
-        if (interbidid) return;
-        interbidid =  setInterval(() => {
-            real++
-            useh1tag()
-            console.log(real)
-            // console.log(interbidid)
-        }, 1000)
-
-    }
-
-
-    decrested.onclick = function () {
-    if (interbidid || decredt) return;
-        decredt = setInterval(() => {
-            real--
-            useh1tag()
-            // console.log(counties)
-        } , 1000)
-    }
-
-    stopcoutng.onclick = function () {
-        clearInterval(interbidid);
-        clearInterval(decredt);
-        interbidid = null;
-        decredt = null;
-        real = 0;
-        useh1tag()
-    }
-
-
+});
